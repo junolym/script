@@ -4,7 +4,22 @@ if [ `id -u` -ne 0 ]; then
     exit 0
 fi
 
-apt-get -y install python-pip && pip install shadowsocks || {
+# set PKM (package manager)
+if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+    PKM="yum"
+elif  grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+    PKM="apt-get"
+elif  grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+    PKM="apt-get"
+else
+    echo "This Script must be running at the CentOS or Ubuntu or Debian!"
+    exit 1
+fi
+
+echo "Installing pip with $PKM ..."
+
+$PKM update
+$PKM -y install python-pip && pip install shadowsocks || {
     echo "install shadowsocks failed"
     exit 1
 }
