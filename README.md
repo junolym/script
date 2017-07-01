@@ -1,5 +1,7 @@
 # 脚本使用命令
 ## Shadowsocks (py)
+**暂只支持最常见的服务器系统：Ubuntu、Debian、CentOS**
+
 下载脚本 (两种任选其一，或使用其他下载方式)
 1. wget
 ```
